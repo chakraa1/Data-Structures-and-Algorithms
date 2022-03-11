@@ -10,7 +10,7 @@ def PrintSpiralMatrix(N,M):
     # Current position
     r, c = 0, 0
     direction = 'right'
-    while(N*M):
+    for _ in range(N*M):
         print(MAT[r][c])
         if direction == 'right': # Moving right
             # Change direction if boundary is being hit
@@ -33,12 +33,11 @@ def PrintSpiralMatrix(N,M):
                 r += 1
         elif direction == 'up':  # Moving up
             if r == 1:
-                # break
                 direction = 'right'
                 c += 1
             else:
                 r -= 1
     return MAT
-N=5
-M=10
+N=3
+M=5
 print(PrintSpiralMatrix(N,M))

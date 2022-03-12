@@ -20,52 +20,45 @@ Output 1: [ [1] ]
 Output 2: [ [1, 2], [4, 3] ]
 
 """
-def PrintBoundarySquareMatrixII(A):
-    M=[[0]*A for _ in range(A)]
-    element=1
-    for icol in range(A):
-        for irow in range(A):
-            M[icol][irow]=element
-            element +=1
-    print(M)
+def PrintSpiralMatrixII(A):
 
-    # Current position
+    SP = [[0] * A for _ in range(A)]
+
     r, c = 0, 0
     direction = 'right'
-    while(True):
-        # print(M[r][c])
-        if direction == 'right': # Moving right
-            # Change direction if boundary is being hit
-            if c == A-1:
+    i = 0 # for tracking spiral interation
+    counter=1
+    for _ in range(A ** 2):
+        SP[r][c] = counter
+        counter +=1
+
+        if direction == 'right':
+            if c == A - 1 - i:
                 direction = 'down'
                 r += 1
             else:
                 c += 1
-        elif direction == 'left': # Moving left
-            if c == 0:
-                direction = 'up'
-                r -= 1
-            else:
-                c -= 1
-        elif direction == 'down': # Moving down
-            if r == A-1:
+        elif direction == 'down':
+            if r == A - 1 - i:
                 direction = 'left'
                 c -= 1
             else:
                 r += 1
-        elif direction == 'up':  # Moving up
-            if r == 1:
-                break
-                # direction = 'right'
-                # c += 1
+        elif direction == 'up':
+            if r == i + 1:
+                direction = "right"
+                i += 1
+                c += 1
             else:
                 r -= 1
-        #print(r,c)
-    return M
-def SpiralOrderSquareMatrixII(A):
-    print(A)
+        elif direction == 'left':
+            if c == i:
+                direction = 'up'
+                r -= 1
+            else:
+                c -= 1
+    return SP
 
 A=1
-A=2
-print(PrintBoundarySquareMatrixII(A))
-#print(SpiralOrderOuterSquareMatrixII(A))
+A=5
+print(PrintSpiralMatrixII(A))

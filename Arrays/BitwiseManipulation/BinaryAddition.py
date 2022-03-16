@@ -18,8 +18,8 @@ def binary_addition(A,B):
 
         carry_fwd = 1 if resulted_digit > 1 else 0
 
-        if carry_fwd != 0:
-            ans = '1' + str(ans)
+    if carry_fwd != 0:
+        ans = '1' + str(ans)
 
     return ans
 A = "0100"

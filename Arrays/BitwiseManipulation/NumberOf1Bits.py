@@ -72,3 +72,5 @@ def countSetBitsRightShift(x):
 
 A=13
 print(NumberOfOneBits(A))
+countSetBitsLeftShift(16)
+countSetBitsRightShift(1023)

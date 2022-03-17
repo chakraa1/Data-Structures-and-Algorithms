@@ -33,5 +33,42 @@ def NumberOfOneBits(A):
         count += A & 1
         A >>= 1
     return count
+
+
+def countSetBitsLeftShift(x):
+    cnt = 0
+    k = 0
+    while True:
+        if x & (1 << k) != 0:
+            cnt += 1
+        k += 1
+
+        if x < (1 << k):
+            break
+    return cnt
+
+# count of bits = log2(x) + 1
+
+# 01001010100101
+# 10000000000000
+
+# x & (1 << 0)
+# x & (1 << 1)
+# ...
+# x & (1 << k)
+def countSetBitsRightShift(x):
+  cnt = 0
+  while x > 0:
+    cnt += x&1
+    x = x>>1
+  return cnt
+
+# 100001010100101
+# 000000000000001
+
+# 100001010100101 >> 1
+# 10000101010010
+# 00000000000001
+
 A=13
 print(NumberOfOneBits(A))

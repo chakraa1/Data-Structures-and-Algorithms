@@ -61,10 +61,15 @@ def InterestingArray(A):
     if odd element present then Yes , otherwise No 
     
     """
+    countOdds = 0
     for x in A:
-        if x & 1  == 1:
-            isInterestingArray = "Yes"
-            break
+        # checking array elements is odd
+        if x & 1 == 1:
+            countOdds += 1
+
+    # Checking total number of odd elements is odd
+    if countOdds & 1 != 1:
+        isInterestingArray = "Yes"
 
     return isInterestingArray
 A = [9, 17]

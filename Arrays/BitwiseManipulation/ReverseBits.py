@@ -44,12 +44,13 @@ Explanation 2:
 =>      11000000000000000000000000000000
 
 """
+
 def ReverseBits(A):
     ans = 0
-    for i in range(32):
-        ans <<= 1
-        ans |= A & 1
-        A >>= 1
+    for i in reversed(range(32)):
+        rev_index = 31-i
+        if A & (1 << i): # Checking if ith bit is ON or not
+            ans = ans | (1 << rev_index) # Setting ith bit with n-i th bit
     return ans
 A = 3
 print(ReverseBits(A))

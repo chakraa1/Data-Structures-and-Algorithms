@@ -39,3 +39,21 @@ Explanation 2: To eat a total of 8 units of food, Boomer behaved normally only o
 
 
 """
+
+def FindingGoodDays(A):
+    goodDays = 0
+    i = 0
+    while True:
+        if A & (1 << i) > 0:
+            goodDays += 1
+
+        i += 1
+
+        if A < (1 << i):
+            break
+
+    return goodDays
+
+A = 5
+A = 8
+print(FindingGoodDays(A))

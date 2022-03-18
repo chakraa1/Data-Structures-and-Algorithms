@@ -22,6 +22,21 @@ def binary_addition(A,B):
         ans = '1' + str(ans)
 
     return ans
+def sum_bin_alternate(s1, s2):
+    ans=0
+    # Make the lengths of 2 strings equal (append zeroes in the beginning)
+    # Iterate from the last bit
+    # b1 , b2
+    # a = int(b1) b = int(b2)
+    # sum = a + b
+    # sum = sum%2
+    # carry = sum//2
+    # ans = ""
+    # ans += str(sum)
+
+    # if carry = 1
+    ans += str(1)
+    return ans
 A = "0100"
 B = "10"
 A = "1010110111001101101000"

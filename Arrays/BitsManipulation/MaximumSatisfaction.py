@@ -46,32 +46,32 @@ Explanation 2: Shaun will pick fruits with fruits quality 2, 2, 7, 15 and satisf
 """
 
 def MaximumSatisfaction(A):
-    maxSatisfactionvalue=0
+    """
+    ============
+    Approach
+    ============
+    Check IF most significant bit(left most) is 1 in at least 4 of them. If yes then select
+    those numbers (having MSB = 1) and remove rest of them and also remove left most bit.
+    ELSE there are less than 4 numbers having most significant bit 1 then keep all of them
+    and remove most significant bit from all of them. And repeat until there are 0 bits left.
+
+    This way you’ll get solution in N*log(K) where K is the MAX value of input number.
 
     """
-    Goal is to SET most significant bit(i.e. MSB) (for maximizing satisfaction) for at least 4 quantities 
-    simultaneously as "a & b & c & d" operation to be performed .
-    If there are k numbers whose MSB is active and remaining n-k numbers in which the bit is zero
-    we can ignore n-k numbers as those are anyway not going to contribute for max statisfaction
-    """
-    commonSetBitIndex=-1
+    maxSatisfaction = 0
 
     for i in reversed(range(31)): # why range 31 - because we're ignoring signed bit of 32 bit integer
-        countActiveMSB=0
+        bestcaseMSB = maxSatisfaction | (1 << i)
+        countBestCaseMSB = 0
+
         for k in range(len(A)):
-            if A[k] & (1 << i) > 0:
-                countActiveMSB += 1
+            if A[k] & bestcaseMSB == bestcaseMSB:
+                countBestCaseMSB += 1
 
-            if countActiveMSB >= 4:
-                commonSetBitIndex = i
-                break
-    # Now check if common set bit is on for which quantities i.e. input numbers in the array
-    for element in A:
-        if element & (1 << commonSetBitIndex):
-            maxSatisfactionvalue += 1
+            if countBestCaseMSB >= 4:
+                maxSatisfaction = bestcaseMSB
 
-    return maxSatisfactionvalue
-
+    return maxSatisfaction
 A = [10, 20, 15, 4, 14]
 A = [2, 2, 7, 15]
 print(MaximumSatisfaction(A))

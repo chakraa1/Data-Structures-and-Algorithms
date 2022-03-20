@@ -109,21 +109,31 @@ def AlternatingSubarraysEasyOptimised(A,B):
     return alternating_subarray_indices
 def AlternatingSubarraysOrderN(A,B):
     alternating_subarray_indices = []
-    subrray_length = 2 * B + 1
+
     n = len(A)
+    k = 2 * B + 1
+    left,right =0,0
 
-    # Indentify first alternating sub-array
+    while right < n:
+        if right == 0 or A[right] != A[right-1]: # Comparing with previous element (i.e. right pointer) but not with next element
+            right += 1
+        else:
+            left = right # When no alternating sub next sequence should start from current index
+            right += 1
 
-    # Then check if new element is alternating based on last element of previous alternating sub array
+        subarray_length = right - left  # Because i,j are not both inclusive
+        if subarray_length == k:
+            alternating_subarray_indices.append(left+B) # as k is 2B +1 , middle element would be i+B the element
+            left += 1 # Update left pointer to start next sequence
 
     return alternating_subarray_indices
-A = [1, 0, 1, 0, 1]
-B = 1
+#A = [1, 0, 1, 0, 1]
+#B = 1
 # Output - [1, 2, 3]
-print(AlternatingSubarraysEasyBruteForce(A,B))
+#print(AlternatingSubarraysEasyBruteForce(A,B))
 
-#A = [0, 0, 0, 1, 1, 0, 1]
-#B = 0
+A = [1,1,1,0, 1, 0, 0,1]
+B = 3
 # Output - [0, 1, 2, 3, 4, 5, 6]
 #print(AlternatingSubarraysEasyBruteForce(A,B))
-print(AlternatingSubarraysEasyOptimised(A,B))
+print(AlternatingSubarraysOrderN(A,B))

@@ -58,7 +58,6 @@ def MajorityElement(A):
             else:
                 me = x
                 freq = 1
-        print("elem ",x,"me",me,"freq",freq)
 
     me_count = 0
     for x in A:

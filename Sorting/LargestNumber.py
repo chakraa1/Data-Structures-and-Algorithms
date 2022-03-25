@@ -39,19 +39,42 @@ Explanation 1: Reorder the numbers to [9, 5, 34, 3, 30] to form the largest numb
 Explanation 2: Reorder the numbers to [9, 3, 2, 0] to form the largest number 9320.
 
 """
-def LargestNumber(A):
-    ans = 0
-    B = sorted(A,reverse=True)
-    n = len(B)
-    for i,x in enumerate(B):
-        print(i,x)
-        if i == 0:
-            ans = x
-        else:
-            ans += (10 ** (n-i))*x
-    ans = str(ans)
-    return ans[::-1]
+from functools import cmp_to_key
+def customSort(a,b):
+    if a + b > b + a:
+        return -1
+    elif b + a > a + b:
+        return 1
+    else:
+        return 0
 
+def LargestNumber(A):
+    ans = ''
+
+    """
+     For edge case check if all elements of the input
+     arrays are same and that is zero 
+    """
+    zeroCnt = 0
+    for x in A:
+        if x == 0:
+            zeroCnt += 1
+    if zeroCnt == len(A):
+        return '0'
+    else:
+        """
+        custom comparator 
+        """
+        B = list(map(str,A))
+        print(B)
+        B = sorted(B,key=cmp_to_key(customSort))
+
+        for x in B:
+            ans += x
+
+    return ans
 A = [3, 30, 34, 5, 9]
+A = [0, 0, 0, 0]
 #A = [2, 3, 9, 0]
+
 print(LargestNumber(A))

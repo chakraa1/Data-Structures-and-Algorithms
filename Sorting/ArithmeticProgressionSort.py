@@ -48,6 +48,7 @@ Explanation 2:
 """
 
 def ArithmeticProgressionSorting(A):
+    ans = 0
     B = sorted(A)
     n = len(A)
     d = (B[n-1] - B[0])//(n-1)
@@ -60,9 +61,10 @@ def ArithmeticProgressionSorting(A):
             prev = B[i]
 
     if isAP == True:
-        return 1
-    else:
-        return 0
+        ans = 1
+
+    return ans
+
 A = [3, 5, 1]
 #A = [2, 4, 1]
 print(ArithmeticProgressionSorting(A))

@@ -1,0 +1,87 @@
+""""
+====================
+Problem Description
+====================
+Given an array with N objects colored red, white, or blue, sort them so that objects of the same color are adjacent,
+with the colors in the order red, white, and blue.
+We will use the integers 0, 1, and 2 to represent red, white, and blue, respectively.
+Note: Using the library sort function is not allowed.
+
+====================
+Problem Constraints
+====================
+1 <= N <= 1000000
+0 <= A[i] <= 2
+
+====================
+Input Format
+====================
+First and only argument of input contains an integer array A.
+
+====================
+Output Format
+====================
+Return an integer array in asked order
+
+====================
+Example Input
+====================
+Input 1 : A = [0 1 2 0 1 2]
+Input 2:  A = [0]
+
+====================
+Example Output
+====================
+Output 1: [0 0 1 1 2 2]
+Output 2: [0]
+
+====================
+Example Explanation
+====================
+Explanation 1: [0 0 1 1 2 2] is the required order.
+
+"""
+from functools import cmp_to_key
+def compareColor(color1,color2):
+    if color1 < color2:
+        return -1
+    elif color1 == color2:
+        return 0
+    else:
+        return 1
+
+def SortByColor(A):
+    ans = sorted(A,key=cmp_to_key(compareColor))
+    return ans
+
+def SortByColorAlternateApproach(A):
+    ans =[]
+    count_0 = 0
+    count_1 = 0
+    count_2 = 0
+
+    for x in A:
+        if x == 0:
+            count_0 += 1
+        elif x == 1:
+            count_1 += 1
+        elif x == 2:
+            count_2 += 1
+
+    for i in range(count_0):
+        ans.append(0)
+
+    n = len(ans)
+    for i in range(n, n + count_1):
+        ans.append(1)
+
+    n = len(ans)
+    for i in range(n, n + count_2):
+        ans.append(2)
+
+    return ans
+
+A = [0,1,2,0,1,2]
+#A = [0]
+print("Using compare to method", SortByColor(A))
+print("Using counting method", SortByColorAlternateApproach(A))

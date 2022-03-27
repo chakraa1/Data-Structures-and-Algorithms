@@ -43,10 +43,16 @@ from functools import cmp_to_key
 def customSort(a,b):
     x = int(str(a) + str(b))       # digit a followed by b
     y = int(str(b) + str(a))       # digit b followed by a
-    if x > y:
-        return -1   # digit a must be left of b
-    elif y > x:
-        return 1    # digit a must be right of b
+    """
+    a,b digit arrangements 
+    a  <-  b --> return -1 [Case A]
+    b  ->  a --> return  1 [Case B]
+    a  ==  b --> return  0 [Case C]
+    """
+    if x < y:        # i.e. CASE B
+        return 1     # digit a must be left of b
+    elif x > y:      # i.e. Case A
+        return -1    # digit a must be right of b
     else:
         return 0
 

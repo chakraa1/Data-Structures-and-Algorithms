@@ -17,8 +17,8 @@ def countFactors(N):
 Sorting by factor count DESC and if same factor count then sort the element values by values ASC
 """
 def compare_by_factor(a,b):
-    a_fcnt = countFactors(a)
-    b_fcnt = countFactors(b)
+    a_fcnt = countFactors(a) # O(sqrt(a)) --> Expensive operation
+    b_fcnt = countFactors(b) # O(sqrt(b)) --> Expensive operation
 
     if a_fcnt < b_fcnt:
         return 1        # desc
@@ -40,12 +40,18 @@ A = [1,2,5,10,15,16,6]
 print("before sorting --> ",A)
 
 """
-Approach 1 -  Comparator "cmp-to-key" approach 
+Approach 1 -  Comparator "cmp-to-key" approach
+              Time complexity - nlogn * (sqrt(a) + sqrt(b)) (i.e. assume this to be very expensive if array
+                                                            value is large . we'll call it as x
 """
 print("after sorting approach 1 --> ",sorted(A,key=cmp_to_key(compare_by_factor)))
 
 """
-Approach 2 -  Exploit stability 
+Approach 2 -  Exploit stability
+Time complexity - N * x + nlogn * 1 (why 1 as we're comparing only two values )
+Optimized approach than approach 1
+Pros - Time complexity is batter than approach 1 
+Cons - Space complexity is more as we're storing keys arrays and then applying sort 
 """
 # First sort by value ascending
 A_sorted_asc=sorted(A)

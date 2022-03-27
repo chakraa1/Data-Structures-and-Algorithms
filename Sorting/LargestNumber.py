@@ -74,7 +74,7 @@ def LargestNumber(A):
 
     return ans
 A = [3, 30, 34, 5, 9]
-A = [0, 0, 0, 0]
+#A = [0, 0, 0, 0]
 #A = [2, 3, 9, 0]
 
 print(LargestNumber(A))

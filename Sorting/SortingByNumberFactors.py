@@ -1,5 +1,18 @@
 """
 Sort an array by Numbers of factors
+
+======================================================
+Difference between comparator and key based approach
+======================================================
+=========
+Compartor
+=========
+Takes two values as argument and return -1,0,1
+=========
+Keys
+=========
+Optimized approach, it takes only one value and returns score
+
 """
 from functools import cmp_to_key
 def countFactors(N):

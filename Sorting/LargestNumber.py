@@ -41,10 +41,12 @@ Explanation 2: Reorder the numbers to [9, 3, 2, 0] to form the largest number 93
 """
 from functools import cmp_to_key
 def customSort(a,b):
-    if a + b > b + a:
-        return -1
-    elif b + a > a + b:
-        return 1
+    x = int(str(a) + str(b))       # digit a followed by b
+    y = int(str(b) + str(a))       # digit b followed by a
+    if x > y:
+        return -1   # digit a must be left of b
+    elif y > x:
+        return 1    # digit a must be right of b
     else:
         return 0
 
@@ -65,12 +67,11 @@ def LargestNumber(A):
         """
         custom comparator 
         """
-        B = list(map(str,A))
-        print(B)
-        B = sorted(B,key=cmp_to_key(customSort))
+        # B = list(map(str,A))
+        B = sorted(A,key=cmp_to_key(customSort))
 
         for x in B:
-            ans += x
+            ans += str(x)
 
     return ans
 A = [3, 30, 34, 5, 9]

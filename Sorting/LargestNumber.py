@@ -41,8 +41,8 @@ Explanation 2: Reorder the numbers to [9, 3, 2, 0] to form the largest number 93
 """
 from functools import cmp_to_key
 def customSort(a,b):
-    x = int(str(a) + str(b))       # digit a followed by b
-    y = int(str(b) + str(a))       # digit b followed by a
+    x = int(str(a) + str(b))       # digit a followed by b [a  <-  b]
+    y = int(str(b) + str(a))       # digit b followed by a [b  ->  a]
     """
     a,b digit arrangements 
     a  <-  b --> return -1 [Case A]

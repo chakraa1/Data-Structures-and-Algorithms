@@ -1,3 +1,6 @@
+"""
+
+"""
 def LongestCommonPrefix(A):
     n = len(A)
     if n == 0:

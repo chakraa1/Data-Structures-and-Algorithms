@@ -74,10 +74,10 @@ def longestPalindromeNSqure(A):
         while right < n and A[right] == A[i]:
             right += 1
 
-        while left > 0 and A[left] == A[i]:
+        while left >= 0 and A[left] == A[i]:
             left -= 1
 
-        while left > 0 and right < n and A[right] == A[left]:
+        while left >= 0 and right < n and A[right] == A[left]:
             left -= 1
             right += 1
 

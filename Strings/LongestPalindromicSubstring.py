@@ -81,7 +81,7 @@ def longestPalindromeNSqure(A):
             left -= 1
             right += 1
 
-        current_pal_len = right - left + 1
+        current_pal_len = right - left - 1
         if current_pal_len > max_pal_len:
             max_pal_len = current_pal_len
             start = left + 1
@@ -90,7 +90,7 @@ def longestPalindromeNSqure(A):
 
     return ans
 A = "aaaabaaa"
-#A ="btootmb"
+A ="btootmb"
 #A ="abb"
 
 #print(reverse_str(A))

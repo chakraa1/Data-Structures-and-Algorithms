@@ -61,7 +61,7 @@ def check_palindrome(S,start,end):
 def longestPalindromeNSqure(A):
     n = len(A)
     if n < 2:
-        return n  # if string is empty then size will be 0.
+        return A  # if string is empty then size will be 0.
         # if n==1 then, answer will be 1(single
         # character will always palindrome)
     start = 0

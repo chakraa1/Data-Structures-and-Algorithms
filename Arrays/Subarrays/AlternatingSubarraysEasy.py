@@ -127,6 +127,48 @@ def AlternatingSubarraysOrderN(A,B):
             l += 1 # Update left pointer to start next sequence
 
     return ans
+
+def AltSubSimplestOrderNApproach(A,B):
+    ans = []
+    n = len(A)
+    if B == 0:
+        for i in range(n):
+            ans.append(i)
+
+        return ans
+    """
+    Approach is to find the centre with below conditions
+    A[i] - A[i-1] >= B
+    A[i+1] - A[i] >= B
+    A[i] != A[i-1]
+    A[i] != A[i+1]
+    Consideration - Even if single element can be considered as Alternating sub array 
+    
+    Time complexity - O(n)
+    Space complexity - O(3n)
+    
+    """
+    cntL = [0] * n
+    cntL[0] = 1
+    for i in range(1,n):
+        if A[i] != A[i-1]:
+            cntL[i] = cntL[i-1] + 1
+        else:
+            cntL[i] = 1
+
+    cntR = [0] * n
+    cntR[n-1] = 1
+    for i in reversed(range(0,n-1)):
+        if A[i] != A[i+1]:
+            cntR[i] = cntR[i+1] + 1
+        else:
+            cntR[i] = 1
+
+    for i in range(1,n-1):
+        if cntL[i] >= B and cntR[i] >= B and A[i] != A[i-1] and A[i] != A[i+1]:
+            ans.append(i)
+
+    return ans
 A = [1, 0, 1, 0, 1]
 B = 1
 # Output - [1, 2, 3]
@@ -135,3 +177,7 @@ B = 1
 A = [0, 0, 0, 1, 1, 0, 1]
 B = 0
 print(AlternatingSubarraysOrderN(A,B))
+
+#A = [1, 0, 1, 0, 1,1]
+#B = 1
+print(AltSubSimplestOrderNApproach(A,B))

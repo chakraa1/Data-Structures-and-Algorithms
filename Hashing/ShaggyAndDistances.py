@@ -70,18 +70,19 @@ def ShaggyAndDistances2(A):
     ans = -1
     n = len(A)
 
-    freq = dict()
-    print(A)
+    min_len = float('inf')
+    pair_map = dict()
 
-    min_distance = float('inf')
-    for s in range(len(A)):
-        for e in range(s,n):
-            if A[s] == A[e]:
-                d = e - s
-                min_distance = min(d, min_distance)
+    for i in range(len(A)):
+        if A[i] in pair_map:
+            length = i - pair_map[A[i]]
+            if length < min_len:
+                min_len = length
+        else:
+            pair_map[A[i]] = i
 
-    if min_distance > 0:
-        ans = min_distance
+    if min_len != float('inf'):
+        ans = min_len
 
     return ans
 

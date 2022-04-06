@@ -50,8 +50,43 @@ Explanation 1: [2, 3] sums up to 5.
 Explanation 2: No subarray sums up to required number
 
 """
+def IsGoodPair(A,K):
+    present = set()
+    for x in A:
+        if K - x in present:
+            return True
+        present.add(x)
+
+    return False
+
+def IsSubArraySumZero(A):
+    ans = False
+    sum_map = dict()
+    sum_1 = 0
+    for i in range(len(A)):
+        if A[i] == 0:
+            return True
+        sum_1 += A[i]
+        if sum_1 == 0 or sum_1 in sum_map:
+            return True
+        sum_map[A[i]] = i
+    return ans
 
 def SubarrayWithGivenSum(A,B):
     ans = []
-    
-    return ans
+    isSumZero = IsSubArraySumZero(A)
+    isGoodPair = IsGoodPair(A,B)
+
+    if isSumZero and isGoodPair:
+        return 1
+
+    return -1
+
+A = [1, 2, 3, 4, 5]
+B = 5
+"""
+A = [5, 10, 20, 100, 105]
+B = 110
+"""
+
+print(SubarrayWithGivenSum(A,B))

@@ -50,6 +50,9 @@ Explanation 1: [2, 3] sums up to 5.
 Explanation 2: No subarray sums up to required number
 
 """
+from collections import Counter, OrderedDict
+from collections import OrderedDict
+
 def IsGoodPair(A,K):
     present = set()
     for x in A:
@@ -72,21 +75,58 @@ def IsSubArraySumZero(A):
         sum_map[A[i]] = i
     return ans
 
-def SubarrayWithGivenSum(A,B):
+def SubarrayWithGivenSumExtraSC(A,B):
     ans = []
-    isSumZero = IsSubArraySumZero(A)
-    isGoodPair = IsGoodPair(A,B)
+    p = [A[0]]
+    for x in A[1:]:
+        p.append(x+p[-1])
 
-    if isSumZero and isGoodPair:
-        return 1
+    pf_map = dict()
+
+    for i in range(len(p)):
+        if p[i] not in pf_map:
+            pf_map[p[i]] = i
+
+    for i in range(len(p)):
+        if p[i] - B in pf_map:
+            start = pf_map[p[i] - B]
+            end = i
+            return A[start+1:end+1]
 
     return -1
+def SubarrayWithGivenOptimizedSC(A,B):
+    ans = []
+    pf_map = dict()
+    Sum = 0
+    for i in range(len(A)):
+        Sum += A[i]
+        if Sum not in pf_map:
+            pf_map[Sum] = i
+
+    min_start = float('inf')
+    min_end = float('inf')
+    pf_map[0] = -1
+    for pf_sum in pf_map.keys():
+        if pf_sum - B in pf_map:
+            start = pf_map[pf_sum - B]
+            min_start = min(start, min_start)
+
+            end = pf_map[pf_sum]
+            min_end = min(end, min_end)
+
+    if min_start == float('inf'):
+        return [-1]
+
+    return A[min_start + 1:min_end + 1]
+
 
 A = [1, 2, 3, 4, 5]
 B = 5
 """
 A = [5, 10, 20, 100, 105]
 B = 110
+
 """
 
-print(SubarrayWithGivenSum(A,B))
+#print(SubarrayWithGivenSumExtraSC(A,B))
+print(SubarrayWithGivenOptimizedSC(A,B))

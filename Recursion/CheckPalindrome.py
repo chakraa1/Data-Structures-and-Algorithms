@@ -62,9 +62,18 @@ def isPalindrome(A,s,e):
         else:
             return 0
 
+def isPalindrome2(A,s,e):
+    if s >= e:
+        return 1
+    if A[s] == A[e]:
+        return isPalindrome2(A,s+1,e-1)
+
+    return 0
 def solve(A):
     if len(A) == 0:
         return 1
-    return isPalindrome(A,0,len(A)-1)
+    return isPalindrome2(A,0,len(A)-1)
 
 print(solve("naman"))
+print(solve("abcd"))
+print(solve("nitin"))

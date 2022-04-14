@@ -50,12 +50,13 @@ def pow(A, B, C):
     if B == 0:
         return 1 % C
 
-    half_power = pow(A, B // 2, C)
+    half_power_even = pow(A, B // 2, C)
 
     if B % 2 == 0:
-        return ((half_power % C) * (half_power % C)) % C
+        return ((half_power_even % C) * (half_power_even % C)) % C
     else:
-        return ((A % C) * (half_power % C) * (half_power % C)) % C
+        return ((A % C) * (half_power_even % C) * (half_power_even % C)) % C
+
 A = 2
 B = 3
 C = 3

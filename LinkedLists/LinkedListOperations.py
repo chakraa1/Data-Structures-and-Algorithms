@@ -114,9 +114,11 @@ class LinkedList:
             new_node.next = target_position.next
             target_position.next = new_node
 
-    def insert_node(self, position, value):
+    def insert_node(self, value, position=None):
         node = Node(value)
-        if position == 1:
+        if position == None:
+            self.insert_at_tail_position(value)
+        elif position == 1:
             self.insert_at_head_position(value)
         else:
             self.insert_at_given_position(value, position)
@@ -128,7 +130,7 @@ class LinkedList:
         curr_position = self.head
 
         if curr_position == None:
-            print("Empty linked list")
+            print("Empty Linkedlist, nothing to print")
         else:
             while curr_position != None:
                 print(curr_position.data, end=" ")
@@ -142,9 +144,11 @@ class LinkedList:
 """
 
 ll = LinkedList()
-ll.insert_node(1,33)
+ll.print_all()
+ll.insert_node(33, 1)
+ll.insert_node(32)
 ll.insert_at_tail_position(34)
-ll.insert_node(2,44)
+ll.insert_node(44, 2)
 
 ll.print_all()
 

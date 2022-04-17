@@ -60,6 +60,7 @@ At fourth case delete value at first position, only one element left 24.
 At fifth case print: 24.
 
 """
+
 class Node:
     def __init__(self,value):
         self.data = value
@@ -74,10 +75,8 @@ class LinkedList:
         while current_node != None and position > 0:
             current_node = current_node.next
             position -= 1
-
         if current_node == None:
             return None
-
         return current_node
 
     def insert_at_head_position(self,value):
@@ -90,29 +89,23 @@ class LinkedList:
 
     def insert_at_tail_position(self,value):
         new_node = Node(value)
-        """
-        Edge case - Empty linked list 
-        """
         if self.head == None:
             self.head = new_node
             return
-        """
-        Edge case - Non Empty linked list 
-        """
         current_position = self.head
         while current_position.next != None:
             current_position = current_position.next
-
         current_position.next = new_node
 
     def insert_at_given_position(self,value,position):
-        target_position = self.findNodeByPosition(position-1)
+        target_position = self.findNodeByPosition(position-2)
         if target_position == None:
-            return None
+            return
         else:
             new_node = Node(value)
             new_node.next = target_position.next
             target_position.next = new_node
+
 
     def insert_node(self, value, position=None):
         node = Node(value)
@@ -123,38 +116,40 @@ class LinkedList:
         else:
             self.insert_at_given_position(value, position)
 
-    def print_all(self):
-        """
-            Output each element followed by a space
-        """
-        curr_position = self.head
-
-        if curr_position == None:
-            print("Empty Linkedlist, nothing to print")
+    def delete_at_position(self,position):
+        if position == 1:
+            if self.head != None:
+                self.head = self.head.next
         else:
+            current_position = self.findNodeByPosition(position - 2)
+            if current_position == None:
+                return
+            else:
+                if current_position.next!=None:
+                    current_position.next = current_position.next.next
+
+
+    def print_all(self):
+        curr_position = self.head
+        if curr_position == None:
+            return
+        else:
+            print(curr_position.data, end="")
+            curr_position = curr_position.next
             while curr_position != None:
-                print(curr_position.data, end=" ")
+                print("", end=" ")
+                print(curr_position.data, end="")
                 curr_position = curr_position.next
-
-
-"""
-=================================
- Main
-=================================
-"""
-
+        print()
 ll = LinkedList()
-ll.print_all()
-ll.insert_node(33, 1)
-ll.insert_node(32)
-ll.insert_at_tail_position(34)
-ll.insert_node(44, 2)
-
-ll.print_all()
-
-"""
-def delete_node(self, position):
-"""
-
-
-
+def insert_node(position, value):
+    # @param position, an integer
+    # @param value, an integer
+    ll.insert_node(value,position)
+def delete_node(position):
+    # @param position, integer
+    # @return an integer
+    ll.delete_at_position(position)
+def print_ll():
+    # Output each element followed by a space
+    ll.print_all()

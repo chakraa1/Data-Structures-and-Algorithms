@@ -125,7 +125,7 @@ class LinkedList:
             if current_position == None:
                 return
             else:
-                if current_position.next!=None:
+                if current_position.next != None:
                     current_position.next = current_position.next.next
 
 

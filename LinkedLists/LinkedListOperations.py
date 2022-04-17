@@ -141,6 +141,7 @@ class LinkedList:
                 print(curr_position.data, end="")
                 curr_position = curr_position.next
         print()
+
 ll = LinkedList()
 def insert_node(position, value):
     # @param position, an integer

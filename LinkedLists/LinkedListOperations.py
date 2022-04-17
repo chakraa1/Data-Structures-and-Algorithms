@@ -71,15 +71,22 @@ class LinkedList:
 
     def findNodeByPosition(self,position):
         current_node = self.head
-        while position > 0:
+        while current_node != None and position > 0:
             current_node = current_node.next
             position -= 1
+
+        if current_node == None:
+            return None
+
         return current_node
 
     def insert_at_head_position(self,value):
         new_node = Node(value)
-        new_node.next = self.head
-        self.head = new_node
+        if self.head == None:
+            self.head = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
 
     def insert_at_tail_position(self,value):
         new_node = Node(value)
@@ -101,7 +108,7 @@ class LinkedList:
     def insert_at_given_position(self,value,position):
         target_position = self.findNodeByPosition(position-1)
         if target_position == None:
-            return
+            return None
         else:
             new_node = Node(value)
             new_node.next = target_position.next
@@ -119,10 +126,11 @@ class LinkedList:
             Output each element followed by a space
         """
         curr_position = self.head
+
         if curr_position == None:
             print("Empty linked list")
         else:
-            while curr_position.next != None:
+            while curr_position != None:
                 print(curr_position.data, end=" ")
                 curr_position = curr_position.next
 
@@ -134,9 +142,9 @@ class LinkedList:
 """
 
 ll = LinkedList()
-ll.insert_at_head_position(33)
-#ll.insert_node(1,33)
-#ll.insert_node(2,44)
+ll.insert_node(1,33)
+ll.insert_at_tail_position(34)
+ll.insert_node(2,44)
 
 ll.print_all()
 

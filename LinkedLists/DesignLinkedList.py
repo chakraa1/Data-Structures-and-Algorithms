@@ -87,67 +87,79 @@ class ListNode:
         self.val = x
         self.next = None
 
-class LinkedList:
-    def __init__(self):
-        self.head = None
 
-    def findNodeByPosition(self,position):
-        current_node = self.head
-        while current_node != None and position > 0:
-            current_node = current_node.next
-            position -= 1
-        if current_node == None:
-            return None
-        return current_node
+def print_ll(head):
+    itr = head
+    while itr != None:
+        print(itr.val, end=" ")
+        itr = itr.next
+    print()
 
-    def insert_at_head_position(self,value):
+def AddNodeBeforeFirstElement(head, value):
+    new_node = ListNode(value)
+    new_node.next = head
+    head = new_node
+    return head
+
+
+def AppendNodeAfterLastElement(head, value):
+    if head == None:
+        head = ListNode(value)
+    else:
         new_node = ListNode(value)
-        if self.head == None:
-            self.head = new_node
-        else:
-            new_node.next = self.head
-            self.head = new_node
+        current_head = head
+        while current_head.next != None:
+            current_head = current_head.next
 
-    def insert_at_tail_position(self,value):
+        current_head.next = new_node
+
+    return head
+
+
+def AddNodeBeforeGivenIndex(head, value, index):
+    if index == 0:
+        return AddNodeBeforeFirstElement(head, value)
+    else:
         new_node = ListNode(value)
-        if self.head == None:
-            self.head = new_node
-            return
-        current_position = self.head
-        while current_position.next != None:
-            current_position = current_position.next
-        current_position.next = new_node
+        current_head = head
 
-    def insert_at_given_position(self,value,position):
-        target_position = self.findNodeByPosition(position-2)
-        if target_position == None:
-            return
+        while current_head != None and index - 1 > 0:
+            current_head = current_head.next
+            index -= 1
+        """
+         When given index is out of range of existing linked list
+        """
+        if current_head == None:
+            return head
         else:
-            new_node = ListNode(value)
-            new_node.next = target_position.next
-            target_position.next = new_node
+            new_node.next = current_head.next
+            current_head.next = new_node
+
+            return head
 
 
-    def insert_node(self, value, position=None):
-        node = ListNode(value)
-        if position == None:
-            self.insert_at_tail_position(value)
-        elif position == 1:
-            self.insert_at_head_position(value)
+def DeleteNodeGivenIndex(head, index):
+    if head == None:
+        return head
+    if index == 0:
+        return head.next
+    else:
+
+        current_head = head
+
+        while current_head != None and index - 1 > 0:
+            current_head = current_head.next
+            index -= 1
+
+        """
+        When given index is out of range of existing linked list
+        
+        """
+        if current_head == None or current_head.next == None:
+            return head
         else:
-            self.insert_at_given_position(value, position)
-
-    def delete_at_position(self,position):
-        if position == 1:
-            if self.head != None:
-                self.head = self.head.next
-        else:
-            current_position = self.findNodeByPosition(position - 2)
-            if current_position == None:
-                return
-            else:
-                if current_position.next != None:
-                    current_position.next = current_position.next.next
+            current_head.next = current_head.next.next
+            return head
 
 class Solution:
     # @param A : list of list of integers
@@ -180,18 +192,24 @@ class Solution:
             [1, 2, -1] - > Append a node of value 2 AFTER the last element --> After second operation the list is 1 -> 2 -> NULL
             [2, 3, 1]  - > Add a node of value 3 BEFORE 3rd index position --> After third operation the list is 1 -> 3 -> 2 -> NULL
         """
+        head = None
+
         for row in range(len(A)):
+
             type_of_operation = A[row][0]
-            x = 0
-            if type_of_operation in (0,1,2):
-                x = A[row][1]
+            # print(type_of_operation, A[row][1], A[row][2])
 
-            if type_of_operation == 2:
-                index = A[row][2]
-            elif type_of_operation == 3:
-                index = A[row][1]
+            if type_of_operation == 0:
+                head = AddNodeBeforeFirstElement(head, A[row][1])
+            elif type_of_operation == 1:
+                head = AppendNodeAfterLastElement(head, A[row][1])
+            elif type_of_operation == 2:
+                head = AddNodeBeforeGivenIndex(head, A[row][1], A[row][2])
+            else:
+                head = DeleteNodeGivenIndex(head, A[row][1])
 
+            # print_ll(head)
 
-
+        return head
 
 

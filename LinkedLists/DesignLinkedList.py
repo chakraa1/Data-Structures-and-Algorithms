@@ -157,8 +157,41 @@ class Solution:
             A[i][0] represents the type of operation.
             A[i][1], A[i][2] represents the corresponding elements with respect to type of operation.
 
+            0 x -1:     ADD a node of value x BEFORE the FIRST element of the linked list
+            1 x -1:     APPEND a node of value x AFTER the LAST element of the linked list.
+            2 x index:  ADD a node of value x BEFORE the indexth node in the linked list . If the index equals the length
+                        of the linked list, the node will be appended to the end of the linked list.
+                        If the index is greater than the length, the node will not be inserted.
+
+            3 index -1: DELETE the indexth node in the linked list, if the index is valid.
+
+            ======
+            Input
+            ======
+            A = [[0, 1, -1],
+                [1, 2, -1],
+                [2, 3, 1]]
+
+            =============
+            Explanation
+            =============
+
+            [0, 1, -1] - > Add a node of value 1 BEFORE the 1st element    --> After first operation the list is 1 -> NULL
+            [1, 2, -1] - > Append a node of value 2 AFTER the last element --> After second operation the list is 1 -> 2 -> NULL
+            [2, 3, 1]  - > Add a node of value 3 BEFORE 3rd index position --> After third operation the list is 1 -> 3 -> 2 -> NULL
         """
         for row in range(len(A)):
             type_of_operation = A[row][0]
-            for col in range(len(A[0])):
-                print()
+            x = 0
+            if type_of_operation in (0,1,2):
+                x = A[row][1]
+
+            if type_of_operation == 2:
+                index = A[row][2]
+            elif type_of_operation == 3:
+                index = A[row][1]
+
+
+
+
+

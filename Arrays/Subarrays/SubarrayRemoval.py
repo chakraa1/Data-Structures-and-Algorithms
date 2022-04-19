@@ -58,10 +58,12 @@ def subarray_removal(A,B):
 
 A = [7,3,1]
 B = 3
+"""
 
 A = [5,10,15,20]
 B = 4
 
 A = [2,4,1,3,1]
 B = 5
+"""
 print(subarray_removal(A,B))

@@ -50,4 +50,5 @@ def isPrime(N):
 N = 3
 N= 4
 N = 9
+N = 2
 print(isPrime(N))

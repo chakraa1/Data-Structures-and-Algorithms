@@ -17,6 +17,8 @@ def check_pair_difference(A,K):
             return True
         elif A[p2] - A[p1] > K:
             p1 += 1
+            if p1 == p2:
+                p2 += 1
         else:
             p2 += 1
 

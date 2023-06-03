@@ -42,8 +42,8 @@ Explanation 2: Sum of digits of 11 = 1 + 1 = 2
 import sys
 sys.setrecursionlimit(1000000)
 def SumofDigits(A):
-    if A == 0:
-        return 0
+    if A < 10:
+        return A
     Sum = A % 10
     return Sum + SumofDigits(A // 10)
 A = 46
